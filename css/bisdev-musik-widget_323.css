@@ -1,0 +1,48 @@
+/* Bisdev Musik widget – icon, rotating disc, alignment */
+
+.idb-audio-box .elementor-icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.idb-audio-box .elementor-icon i {
+  font-size: 1em;
+}
+
+.idb-audio-box.idb-rotating .idb-unmute-sound .elementor-icon {
+  -webkit-animation: idb_rotating var(--idb-rotate-speed, 12s) linear infinite;
+  animation: idb_rotating var(--idb-rotate-speed, 12s) linear infinite;
+}
+
+.idb-audio-box:not(.idb-rotating) .idb-unmute-sound .elementor-icon {
+  -webkit-animation: none !important;
+  animation: none !important;
+}
+
+@keyframes idb_rotating {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.idb-audio-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+}
+
+.idb-audio-box.idb-align-left {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.idb-audio-box.idb-align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.idb-audio-box.idb-align-right {
+  margin-left: auto;
+  margin-right: 0;
+}

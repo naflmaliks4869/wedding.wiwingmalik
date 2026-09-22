@@ -1,0 +1,18 @@
+/* Title: EFEK MASUK DULU (Legacy CSS) */
+.reveal,.revealin,.revealkanan,.revealkiri,.revealatas,.revealr{
+  position:relative;
+  opacity:0;
+  transition:2s all ease
+}
+.reveal{transform:translateY(6rem) scale(.93)}
+.reveal.active{transform:translateY(0);opacity:1}
+.revealin{transform:translateY(0rem) scale(0)}
+.revealin.active{transform:translateY(0);opacity:1}
+.revealkanan{transform:translate(6rem) scale(.93)}
+.revealkanan.active{transform:translate(0);opacity:1}
+.revealkiri{transform:translate(-6rem) scale(.93)}
+.revealkiri.active{transform:translate(0);opacity:1}
+.revealatas{transform:translateY(-6rem) scale(.93)}
+.revealatas.active{transform:translateY(0);opacity:1}
+.revealr{transform:rotateY(180deg)}
+.revealr.active{transform:translateY(0);opacity:1}

@@ -1,0 +1,248 @@
+/* Bisdev Timeline Widget - Animasi hanya judul+deskripsi, icon tetap */
+
+/* Tidak ada fungsi hide/remove khusus story-section */
+
+.idb-timeline {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 80px;
+  --idb-tl-icon-size: 32px;
+  --idb-tl-fill: 0;
+  --idb-tl-reveal-delay: 180ms;
+  --idb-tl-reveal-duration: 1000ms;
+}
+
+.idb-timeline__list {
+  position: relative;
+  z-index: 1;
+  padding-left: 0;
+  margin: 0;
+}
+
+.idb-timeline__line {
+  position: absolute;
+  left: calc(var(--idb-tl-icon-size, 32px) / 2 - 1px);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.idb-timeline__line-track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.idb-timeline__line-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(var(--idb-tl-fill, 0) * 100%);
+  border-radius: 2px;
+  transition: height 0.15s ease-out;
+  z-index: 0;
+}
+
+/* Konten saja: tanpa garis & tanpa kolom ikon (fallback jika markup lama) */
+.idb-timeline--content-only .idb-timeline__line,
+.idb-timeline--content-only .idb-timeline__icon-col {
+  display: none !important;
+}
+
+.idb-timeline--content-only .idb-timeline__item {
+  gap: 0;
+}
+
+/* Item: icon tetap terlihat, hanya content yang animasi */
+.idb-timeline__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+}
+
+/* Konten story (foto + judul + deskripsi) — bisa distyle sebagai card */
+.idb-timeline__content {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Reveal: efek & animasi dari reveal.css (.idb-reveal.idb-ef) — sama seperti Bisdev Reveal */
+.idb-timeline--no-reveal .idb-timeline__content {
+  opacity: 1;
+  transform: none;
+}
+
+.idb-timeline--editor .idb-timeline__content.idb-reveal.idb-ef,
+.idb-timeline--editor .idb-timeline__content.idb-reveal.idb-ef.active,
+.idb-timeline--editor .idb-timeline__content.idb-reveal.idb-ef.idb-reveal-static {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.idb-timeline__item + .idb-timeline__item {
+  margin-top: 24px;
+}
+
+.idb-timeline__icon-col {
+  position: relative;
+  width: var(--idb-tl-icon-size, 32px);
+  min-width: var(--idb-tl-icon-size, 32px);
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.idb-timeline__icon {
+  flex-shrink: 0;
+  width: var(--idb-tl-icon-size, 32px);
+  height: var(--idb-tl-icon-size, 32px);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--idb-tl-icon-size, 32px) * 0.5);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.idb-timeline__icon.is-active {
+  transform: scale(1.05);
+}
+
+.idb-timeline__icon svg,
+.idb-timeline__icon i {
+  display: block;
+  color: inherit;
+}
+
+.idb-timeline__icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  transition: fill 0.25s ease;
+}
+
+.idb-timeline__image {
+  display: block;
+  line-height: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.idb-timeline__image img {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.idb-timeline__title {
+  margin: 0;
+  display: block;
+  width: 100%;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.idb-timeline--title-divider-on .idb-timeline__title::after {
+  content: "";
+  display: block;
+  width: var(--idb-tl-title-divider-width, 100%);
+  max-width: 100%;
+  height: var(--idb-tl-title-divider-height, 1px);
+  background: var(--idb-tl-title-divider-color, #d3d9e2);
+  margin-top: 8px;
+  margin-bottom: var(--idb-tl-title-divider-gap, 8px);
+}
+
+.idb-tl-title-align-left .idb-timeline--title-divider-on .idb-timeline__title::after {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.idb-tl-title-align-center .idb-timeline--title-divider-on .idb-timeline__title::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.idb-tl-title-align-right .idb-timeline--title-divider-on .idb-timeline__title::after {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.idb-tl-title-align-justify .idb-timeline--title-divider-on .idb-timeline__title::after {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.idb-timeline__title-divider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #d3d9e2;
+  margin: 8px 0;
+}
+
+.idb-timeline__desc {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  font-weight: 400;
+  opacity: 0.95;
+  text-align: center;
+}
+
+/* Markup love story (bold/italic) tidak membesarkan teks deskripsi */
+.idb-timeline__desc .niku-multiline,
+.idb-timeline__desc .deskripsi-ls-marker {
+  display: block;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+.idb-timeline__desc strong,
+.idb-timeline__desc .niku-multiline strong {
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.idb-timeline__desc em,
+.idb-timeline__desc .niku-multiline em {
+  font-size: inherit;
+  font-style: italic;
+}
+
+/* Pesan bantu di editor Elementor (mode otomatis / kosong) */
+.idb-timeline--editor-empty {
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  color: #64748b;
+  background: rgba(248, 250, 252, 0.65);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  font-weight: 400;
+  text-align: center;
+}

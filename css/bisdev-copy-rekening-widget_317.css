@@ -1,0 +1,93 @@
+/* Bisdev Copy Rekening Widget base styles (lightweight, class-based) */
+.idb-copy-rek{position:relative;}
+/* Auto mode: beri jarak antar-card agar tidak menempel */
+.idb-copy-rek.idb-copy-rek--auto + .idb-copy-rek.idb-copy-rek--auto{margin-top:12px}
+.idb-copy-rek__box{
+  display:flex;
+  gap:var(--idb-box-gap, 12px);
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:14px;
+  padding:14px;
+  box-sizing:border-box;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+.idb-copy-rek.is-stack .idb-copy-rek__box{flex-direction:column;align-items:stretch}
+.idb-copy-rek.is-row .idb-copy-rek__box{flex-direction:row;align-items:center}
+
+.idb-copy-rek__info{width:100%;min-width:0}
+
+.idb-copy-rek__label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  min-width:0;
+}
+.idb-copy-rek__banktext{font-size:12px;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.idb-copy-rek.is-hide-bankname .idb-copy-rek__banktext{display:none!important}
+
+/* Logo */
+.idb-copy-rek__banklogo{display:inline-flex;align-items:center;flex-shrink:0}
+.idb-copy-rek__banklogo img{display:block;height:auto;max-width:100%}
+.idb-copy-rek__label.is-logo-right .idb-copy-rek__banklogo{margin-left:auto}
+.idb-copy-rek__label.is-logo-right{width:100%}
+
+/* Number + chip */
+.idb-copy-rek__number{margin-top:8px}
+.idb-copy-rek__number.is-clickable{cursor:pointer}
+.idb-copy-rek__chipimg{margin-bottom:6px}
+.idb-copy-rek__chipimg img{display:block;max-width:100%;height:auto}
+.idb-copy-rek__numtext{font-weight:700;letter-spacing:.5px}
+.idb-copy-rek__name{font-size:12px;opacity:.75;margin-top:4px}
+
+/* Button layout */
+.idb-copy-rek.is-btn-right.is-stack .idb-copy-rek__btn{align-self:flex-end}
+.idb-copy-rek.is-btn-bottom .idb-copy-rek__btn{width:100%}
+
+/* Button base — should be overridden by Elementor controls */
+.idb-copy-rek__btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(0,0,0,.12);
+  padding:10px 14px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:all .2s ease;
+  font-size:13px;
+  line-height:1;
+  background:rgba(255,255,255,.85);
+}
+.idb-copy-rek__icon svg{width:1em;height:1em}
+
+/* Toast */
+.idb-copy-rek__toast{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:-10px;
+  transform:translateY(100%);
+  opacity:0;
+  pointer-events:none;
+  transition:all .18s ease;
+  background:rgba(0,0,0,.75);
+  color:#fff;
+  font-size:12px;
+  padding:8px 10px;
+  border-radius:10px;
+  text-align:center;
+}
+.idb-copy-rek__toast.is-show{opacity:1; transform:translateY(0)}
+
+.idb-copy-rek__btn.is-copied{filter:brightness(1.05)}
+.idb-copy-rek__btn.is-failed{filter:brightness(.95)}
+
+/* Editor hint only when editor active */
+.elementor-editor-active .idb-copy-rek__editorhint{
+  font-size:11px;
+  opacity:.65;
+  margin-top:6px;
+}

@@ -1,0 +1,1302 @@
+/* ====================================================================
+   Niku RSVP - Base Style
+   ==================================================================== */
+
+:root {
+  --rsvp-color-primary: #5e6a3b;
+  --rsvp-color-error: #b33939;
+  --rsvp-font: inherit;
+}
+
+/* CARD WRAPPER */
+.rsvp-card {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: var(--rsvp-font);
+}
+
+/* Hide avatar mode */
+.rsvp-card[data-show-avatar="0"] .rsvp-ava {
+  display: none;
+}
+.rsvp-card[data-show-avatar="0"] .rsvp-body {
+  margin-left: 0;
+}
+
+/* ====================================================================
+   RINGKASAN KEHADIRAN (Hadir / Tidak Hadir) — 2 kolom, referensi UI
+   ==================================================================== */
+
+.rsvp-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 7px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 68%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rsvp-stat {
+  min-width: 0;
+  min-height: 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  border-radius: 15px;
+  /* agar tetap terbaca di latar gelap / foto */
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.45) inset;
+}
+
+.rsvp-stat__num {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.rsvp-stat__label {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  max-width: 100%;
+  padding: 0 4px;
+  word-wrap: break-word;
+}
+
+/* Hadir: hijau pucat, teks gelap */
+.rsvp-stat--hadir {
+  background-color: #d1f7e0;
+  border: 1px solid rgba(20, 83, 45, 0.14);
+}
+
+.rsvp-stat--hadir .rsvp-stat__num {
+  color: #0f3d1f;
+}
+
+.rsvp-stat--hadir .rsvp-stat__label {
+  color: #14532d;
+}
+
+/* Tidak hadir: merah muda pucat, teks merah */
+.rsvp-stat--tidak {
+  background-color: #ffe4e4;
+  border: 1px solid rgba(220, 38, 38, 0.16);
+}
+
+.rsvp-stat--tidak .rsvp-stat__num {
+  color: #e11d48;
+}
+
+.rsvp-stat--tidak .rsvp-stat__label {
+  color: #c41e3a;
+}
+
+/* Layar kecil: tombol Hadir / Tidak Hadir tetap satu baris */
+@media (max-width: 767px) {
+  .rsvp-pills {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .rsvp-pill {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
+}
+
+/* Lebar baris ringkasan di mobile (selaras default Elementor 220px) */
+@media (max-width: 767px) {
+  .rsvp-stats {
+    max-width: 220px;
+  }
+}
+
+/* ====================================================================
+   FORM
+   ==================================================================== */
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rsvp-field {
+  width: 100%;
+}
+
+/* Input & Textarea */
+.rsvp-input,
+.rsvp-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #444444;
+  background-color: #ffffff;
+  border: 1px solid #ddd6c5;
+  border-radius: 8px;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.rsvp-input::placeholder,
+.rsvp-textarea::placeholder {
+  color: #b6b3aa;
+}
+
+.rsvp-input:focus,
+.rsvp-textarea:focus {
+  border-color: #103468;
+  box-shadow: 0 0 0 1px rgba(156, 168, 99, 0.12);
+}
+
+
+/* Hover (samakan feel dengan textarea global theme) */
+.rsvp-input:hover,
+.rsvp-textarea:hover {
+  border-color: #103468;
+  box-shadow: 0 0 0 1px rgba(156, 168, 99, 0.08);
+}
+
+/* Kehadiran label */
+.rsvp-presence-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #555555;
+  margin-bottom: 6px;
+}
+
+/* Paksa ikon di dalam pill tetap inline & terpusat */
+.rsvp-pill i,
+.rsvp-pill img,
+.rsvp-pill svg,
+.rsvp-pill .eicon,
+.rsvp-pill [class^="fa-"],
+.rsvp-pill [class*=" fa-"] {
+  display: inline-block;
+  position: static;
+  margin: 0;
+  line-height: 1;
+}
+.rsvp-pill .pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ====================================================================
+   JUMLAH TAMU (tampil saat Hadir dipilih, jika pengaturan ON)
+   ==================================================================== */
+
+.rsvp-jumlah-tamu-wrap {
+  margin-top: 16px;
+  transition: opacity 0.2s ease, margin 0.2s ease;
+}
+
+.rsvp-jumlah-tamu {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #d8d5ca;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rsvp-jumlah-tamu:hover {
+  border-color: #c4c0b5;
+}
+
+.rsvp-jumlah-tamu-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555555;
+  background-color: #f4f2ea;
+  border-right: 1px solid #d8d5ca;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.rsvp-jumlah-tamu-select,
+.rsvp-select.rsvp-jumlah-tamu-select {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 36px 12px 14px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #444444;
+  background-color: #faf9f5;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%23555555' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M3 4.5 L6 7.5 L9 4.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.rsvp-jumlah-tamu-select:hover,
+.rsvp-select.rsvp-jumlah-tamu-select:hover {
+  background-color: #f4f2ea;
+}
+
+.rsvp-jumlah-tamu-select:focus {
+  background-color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(94, 106, 59, 0.2);
+}
+
+/* Badge jumlah tamu di list ucapan */
+.rsvp-jumlah-tamu-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #555555;
+  margin-left: 6px;
+  padding: 1px 6px;
+  background-color: rgba(94, 106, 59, 0.08);
+  border-radius: 4px;
+}
+
+/* Pills container */
+.rsvp-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Tombol Hadir / Tidak */
+.rsvp-pill {
+  flex: 1 1 calc(50% - 5px);
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #d8d5ca;
+  background-color: #ffffff;
+  color: #606658;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+  transition: all 0.15s ease-in-out;
+}
+
+.rsvp-pill .pill-icon {
+  flex-shrink: 0;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.rsvp-pill > span:not(.pill-icon) {
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.rsvp-pill:hover {
+  background-color: #f4f2ea;
+}
+
+.rsvp-pill[data-active="1"] {
+  background-color: #f0f4e6;
+  border-color: #103468;
+  color: #5e6a3b;
+  box-shadow: inset 0 0 0 1px rgba(156, 168, 99, 0.25);
+}
+
+/* Error */
+.rsvp-error {
+  margin-bottom: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  background-color: #ffecec;
+  color: var(--rsvp-color-error);
+  display: none;
+}
+
+.rsvp-error--name {
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.rsvp-error--message {
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.rsvp-textarea.is-over-limit {
+  box-shadow: inset 0 0 0 1px var(--rsvp-color-error, #c0392b);
+}
+
+/* ====================================================================
+   BUTTON KIRIM
+   ==================================================================== */
+
+.rsvp-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--rsvp-color-primary);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+}
+
+.rsvp-field--btn {
+  margin-top: 4px;
+  display: flex; 
+  flex-direction: column;
+  align-items: stretch;
+}
+
+
+.rsvp-send:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.16);
+}
+
+.rsvp-send:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.rsvp-send.is-loading {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.rsvp-send.is-loading::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 8px;
+  animation: rsvp-spin 0.4s linear infinite;
+}
+
+@keyframes rsvp-spin {
+  to { transform: rotate(360deg); }
+}
+
+
+.rsvp-field--btn {
+  margin-top: 4px;
+  display: flex;
+}
+
+.rsvp-field--btn .rsvp-send { 
+  width: 100%; 
+}
+
+.rsvp-field--btn .rsvp-error {
+ margin-top: 8px; 
+}
+
+/* Kiri */
+.rsvp-btn-align-left {
+  justify-content: flex-start;
+}
+
+/* Tengah */
+.rsvp-btn-align-center {
+  justify-content: center;
+}
+
+/* Kanan */
+.rsvp-btn-align-right {
+  justify-content: flex-end;
+}
+
+/* Full Width */
+.rsvp-btn-align-stretch {
+  justify-content: flex-start;
+}
+
+.rsvp-btn-align-stretch .rsvp-send {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* ====================================================================
+   LIVE STATUS (notifikasi terkirim / error)
+   ==================================================================== */
+
+.rsvp-live {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0 16px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, max-height 0.3s ease, margin 0.25s ease, padding 0.25s ease, transform 0.25s ease;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  border-radius: 12px;
+}
+
+.rsvp-live.show {
+  margin-top: 12px;
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  opacity: 1;
+  max-height: 100px;
+  transform: translateY(0);
+}
+
+.rsvp-live--success {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.12), 0 0 1px rgba(0,0,0,0.04);
+}
+
+.rsvp-live--error {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  color: #991b1b;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 2px 12px rgba(239, 68, 68, 0.08), 0 0 1px rgba(0,0,0,0.04);
+}
+
+.rsvp-live__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.rsvp-live--success .rsvp-live__icon {
+  background: rgba(16, 185, 129, 0.2);
+  color: #059669;
+}
+
+.rsvp-live--error .rsvp-live__icon {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+}
+
+.rsvp-live__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.rsvp-live__text {
+  flex: 1;
+  text-align: left;
+}
+
+/* ====================================================================
+   LIST UCAPAN
+   ==================================================================== */
+
+.rsvp-list-wrap {
+  margin-top: 15px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.08s ease, transform 0.08s ease, margin-top 0.08s ease;
+}
+
+/* Fade efek untuk pagination */
+.rsvp-list-wrap.is-fade-out {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.rsvp-list-wrap.is-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scrollbar halus (opsional) */
+.rsvp-list-wrap::-webkit-scrollbar,
+.rsvp-list::-webkit-scrollbar {
+  width: 4px;
+}
+.rsvp-list-wrap::-webkit-scrollbar-track,
+.rsvp-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.rsvp-list-wrap::-webkit-scrollbar-thumb,
+.rsvp-list::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.18);
+  border-radius: 999px;
+}
+
+/* UL list */
+.rsvp-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Item */
+.rsvp-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid #ffffff0f;
+  transition: background-color .2s ease;
+}
+
+/* tahap 1: fade + geser */
+.rsvp-item.is-removing {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* tahap 2: tinggi/margin/padding collapse */
+.rsvp-item--collapse {
+  overflow: hidden !important;
+  transition:
+    height .25s ease,
+    margin .25s ease,
+    padding .25s ease,
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+/* opsional: kurangi spasi antar item saat collapse */
+.rsvp-item--collapse.is-removing {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-width: 0 !important;
+}
+
+/* highlight singkat saat mulai menghapus */
+.rsvp-item.is-removing {
+  background-color: rgba(255, 235, 130, 0.35);
+}
+
+
+.rsvp-item:first-child {
+  border-top: none;
+}
+
+/* Avatar */
+.rsvp-ava {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #c1c9a0;
+  --rsvp-ava-bg: #c1c9a0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.rsvp-ava-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.rsvp-ava svg.rsvp-ava-icon-inline,
+.rsvp-ava .rsvp-ava-icon.rsvp-ava-icon-inline {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Lingkaran luar ikon avatar mengikuti color dari style Elementor (currentColor) */
+.rsvp-ava svg.rsvp-ava-icon-inline circle:first-of-type {
+  fill: currentColor;
+}
+
+/* Siluet user di dalam ikon — mengikuti Background Avatar */
+.rsvp-ava svg.rsvp-ava-icon-inline .rsvp-ava-silhouette,
+.rsvp-ava .rsvp-ava-icon-inline .rsvp-ava-silhouette {
+  fill: var(--rsvp-ava-bg, #c1c9a0);
+}
+
+.rsvp-ava img.rsvp-ava-icon-img,
+.rsvp-ava .rsvp-ava-icon.rsvp-ava-icon-img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.rsvp-ava-letter {
+  display: inline-block;
+}
+
+/* Body */
+.rsvp-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Headline */
+.rsvp-headline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rsvp-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333333;
+}
+
+/* Status label */
+.rsvp-status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.rsvp-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.rsvp-status-hadir {
+  background-color: #eaf6e5;
+  color: #4caf50;
+}
+.rsvp-status-hadir .rsvp-status-dot {
+  background-color: #4caf50;
+}
+
+.rsvp-status-tidak {
+  background-color: #fdecec;
+  color: #e57373;
+}
+.rsvp-status-tidak .rsvp-status-dot {
+  background-color: #e57373;
+}
+
+/* Meta & message */
+.rsvp-meta {
+  font-size: 10px;
+  color: #9a9a9a;
+  margin-top: 1px;
+}
+
+.rsvp-msg {
+  font-size: 12px;
+  color: #555555;
+  margin-top: 2px;
+  word-wrap: break-word;
+}
+
+/* Empty state (kalau dipakai nanti) */
+.rsvp-item.rsvp-empty {
+  justify-content: center;
+  padding: 12px 0;
+  color: #a6a095;
+  font-size: 12px;
+}
+
+/* Delete link */
+.niku-rsvp-delete-comment {
+  display: inline-flex;
+  margin-top: 4px;
+  font-size: 10px;
+  color: #c0392b;
+  text-decoration: none;
+  cursor: pointer;
+}
+.niku-rsvp-delete-comment:hover {
+  text-decoration: underline;
+}
+
+/* ====================================================================
+   PAGINATION - Niku RSVP
+   ==================================================================== */
+
+.rsvp-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ini bisa dioverride oleh kontrol Elementor */
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 14px;
+  flex-wrap: nowrap;
+}
+
+/* Tombol prev/next */
+.rsvp-page-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #5e6a3b;
+  background-color: #5e6a3b;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* Hover */
+.rsvp-page-btn:hover:not(.disabled) {
+  background-color: #4a542f;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.18);
+  transform: translateY(-1px);
+}
+
+/* Disabled (tidak bisa diklik) */
+.rsvp-page-btn.disabled {
+  background-color: #b8c6cf;
+  border-color: #b8c6cf;
+  color: #ffffff;
+  opacity: 0.7;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+  pointer-events: none;
+}
+
+/* Info "halaman / total" */
+.rsvp-page-info {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3f4137;
+  min-width: 40px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  user-select: none;
+}
+
+/* Responsive kecil */
+@media (max-width: 480px) {
+  .rsvp-page-btn {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 14px;
+  }
+  .rsvp-page-info {
+    font-size: 12px;
+  }
+}
+
+
+/* Icon di tombol Hadir / Tidak Hadir */
+.rsvp-pill .pill-icon-elm {
+  font-size: 14px;
+  line-height: 1;
+  color: currentColor;
+}
+
+.rsvp-pill img.rsvp-pill-icon-img,
+.rsvp-pill .pill-icon-elm.rsvp-pill-icon-img,
+.rsvp-pill svg.rsvp-pill-icon-builtin,
+.rsvp-pill .pill-icon-elm.rsvp-pill-icon-builtin {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.rsvp-pill i.pill-icon-elm,
+.rsvp-pill .pill-icon-elm i {
+  display: inline-block;
+  width: auto;
+  height: auto;
+}
+
+.rsvp-pill .pill-icon-elm svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* SVG inline Elementor / Font Awesome (path terisi) — bukan ikon bawaan RSVP */
+.rsvp-pill .pill-icon-elm svg:not(.rsvp-pill-icon-fallback):not(.rsvp-pill-icon-builtin) path {
+  fill: currentColor;
+}
+
+/* Pertahankan warna asli hadir.svg / tidak_hadir.svg (hindari override tema) */
+.rsvp-pill svg.rsvp-pill-icon-builtin path[fill="#2FAE4F"] {
+  fill: #2FAE4F !important;
+}
+
+.rsvp-pill svg.rsvp-pill-icon-builtin path[fill="#F20D16"] {
+  fill: #F20D16 !important;
+}
+
+.rsvp-pill svg.rsvp-pill-icon-builtin path[stroke="#FFFFFF"],
+.rsvp-pill svg.rsvp-pill-icon-builtin g[stroke="#FFFFFF"] {
+  stroke: #FFFFFF !important;
+  fill: none;
+}
+
+/* Fallback stroke SVG */
+.rsvp-pill .pill-icon-elm svg.rsvp-pill-icon-fallback {
+  fill: none;
+  stroke: currentColor;
+}
+
+.rsvp-pill .pill-icon-elm svg.rsvp-pill-icon-fallback path,
+.rsvp-pill .pill-icon-elm svg.rsvp-pill-icon-fallback circle {
+  fill: none;
+  stroke: currentColor;
+}
+
+/* ====================================================================
+   POPUP WHATSAPP
+   ==================================================================== */
+
+/* ===== Fix layout Popup WhatsApp ===== */
+
+.rsvp-card,
+.niku-rsvp-popup-host {
+  position: relative;
+}
+
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop,
+.rsvp-card > .niku-rsvp-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  box-sizing: border-box;
+  background: rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease-out;
+  z-index: 9999;
+}
+
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop.show,
+.rsvp-card > .niku-rsvp-popup-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup,
+.rsvp-card > .niku-rsvp-popup-backdrop .niku-rsvp-popup {
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 18px 14px;
+  max-width: 360px;
+  width: calc(100% - 40px);
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.18);
+  transform: translateY(10px);
+  transition: transform 0.18s ease-out;
+  font-family: inherit;
+}
+
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop.show .niku-rsvp-popup,
+.rsvp-card > .niku-rsvp-popup-backdrop.show .niku-rsvp-popup {
+  transform: translateY(0);
+}
+
+.rsvp-card .niku-rsvp-popup-title,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: #111827;
+  text-align:center;
+}
+
+.rsvp-card .niku-rsvp-popup-text,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-text {
+  font-size: 13px;
+  color: #4b5563;
+  line-height: 1.55;
+  margin-bottom: 12px;
+  text-align:center;
+}
+
+/* wrapper tombol */
+.rsvp-card .niku-rsvp-popup-actions,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* tombol dasar */
+.rsvp-card .niku-rsvp-popup-btn,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  box-sizing: border-box;
+  background: #e5e7eb;
+  color: #374151;
+  transition: background 0.15s ease, transform 0.08s ease, box-shadow 0.08s ease;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0;
+}
+
+/* hover/active halus */
+.rsvp-card .niku-rsvp-popup-btn:hover,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-btn:hover {
+  background: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(15,23,42,0.16);
+}
+
+.rsvp-card .niku-rsvp-popup-btn:active,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* tombol YA */
+.rsvp-card .niku-rsvp-popup-yes,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-yes {
+  background-color: #22c55e;
+  color: #ffffff;
+}
+.rsvp-card .niku-rsvp-popup-yes:hover,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-yes:hover {
+  background-color: #16a34a;
+}
+
+/* tombol TIDAK */
+.rsvp-card .niku-rsvp-popup-no,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-no {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+.rsvp-card .niku-rsvp-popup-no:hover,
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop .niku-rsvp-popup-no:hover {
+  background-color: #b91c1c;
+}
+
+/* ====================================================================
+   POPUP NOTIFIKASI SUKSES (ucapan terkirim) – toast di bawah, style hijau
+   ==================================================================== */
+
+.niku-rsvp-success-popup {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+  z-index: 99999;
+}
+
+.niku-rsvp-success-popup.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.niku-rsvp-success-popup__box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  max-width: 90vw;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+}
+
+.niku-rsvp-success-popup__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.niku-rsvp-success-popup__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.niku-rsvp-success-popup__text {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* ====================================================================
+   RESPONSIVE
+   ==================================================================== */
+
+@media (max-width: 480px) {
+  .niku-rsvp-success-popup {
+    bottom: 16px;
+  }
+
+  .niku-rsvp-success-popup__box {
+    padding: 12px 18px;
+  }
+
+  .niku-rsvp-success-popup__text {
+    font-size: 13px;
+  }
+
+  .rsvp-card {
+    padding: 8px;
+  }
+
+  .rsvp-send {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .rsvp-pill {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  .rsvp-ava {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .rsvp-msg {
+    font-size: 11.5px;
+  }
+}
+
+/* Aksesibilitas */
+.rsvp-error[role="alert"],
+.rsvp-live[role="status"] {
+  outline: none;
+}
+
+/* RSVP: animasi saat pindah halaman komentar */
+.rsvp-list-wrap.is-fade-in{
+  animation: nikuFadeIn 180ms ease-out;
+}
+@keyframes nikuFadeIn{
+  from{ opacity:.35; transform: translateY(2px); }
+  to  { opacity:1;   transform: translateY(0); }
+}
+
+/* Default: sembunyikan tombol hapus */
+.niku-rsvp-delete-comment { display:none !important; }
+
+/* Munculkan hanya saat user login WP (body punya class logged-in) */
+body.logged-in .niku-rsvp-delete-comment { display:inline-block !important; }
+
+/* Force RSVP input/textarea style menang dari reset.css */
+.rsvp-card input.rsvp-input,
+.rsvp-card textarea.rsvp-textarea{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #444444;
+  background-color: #ffffff;
+  border: 1px solid #d0d0d5;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+}
+
+/* Hover konsisten untuk input & textarea */
+.rsvp-card input.rsvp-input:hover,
+.rsvp-card textarea.rsvp-textarea:hover{
+  border-color: #103468;
+  box-shadow: 0 0 0 1px rgba(156, 168, 99, 0.08);
+}
+
+/* Focus konsisten */
+.rsvp-card input.rsvp-input:focus,
+.rsvp-card textarea.rsvp-textarea:focus{
+  border-color: #103468;
+  box-shadow: 0 0 0 3px rgba(156, 168, 99, 0.15);
+}
+
+/* WhatsApp popup now follows the invitation canvas/card instead of the browser viewport. */
+.niku-rsvp-popup-host > .niku-rsvp-popup-backdrop,
+.rsvp-card > .niku-rsvp-popup-backdrop {
+  left: 0;
+  top: 0;
+}
+
+/* ====================================================================
+   REPLY (balasan pemilik dari Mini Dashboard)
+   ==================================================================== */
+
+.rsvp-replies {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0 0 0 12px;
+  border-left: 2px solid rgba(148, 163, 184, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rsvp-reply-item {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.rsvp-reply-author {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.3;
+}
+
+.rsvp-reply-meta {
+  margin-top: 1px;
+  font-size: 10px;
+  color: #94a3b8;
+  line-height: 1.3;
+}
+
+.rsvp-reply-msg {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.45;
+  word-wrap: break-word;
+}
+
+@media (max-width: 480px) {
+  .rsvp-replies {
+    padding-left: 10px;
+    margin-top: 8px;
+    gap: 6px;
+  }
+
+  .rsvp-reply-item {
+    padding: 7px 8px;
+  }
+
+  .rsvp-reply-author {
+    font-size: 11px;
+  }
+
+  .rsvp-reply-msg {
+    font-size: 11px;
+  }
+}
+
+/* iOS zoom saat fokus input jika font < 16px */
+@media screen and (max-width: 768px) {
+  .rsvp-input,
+  .rsvp-textarea,
+  .rsvp-jumlah-tamu-select,
+  .rsvp-select {
+    font-size: 16px !important;
+  }
+}

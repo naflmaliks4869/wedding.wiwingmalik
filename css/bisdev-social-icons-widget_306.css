@@ -1,0 +1,169 @@
+.idb-social-icons{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px;
+}
+
+.idb-social-icons.has-fixed-columns{
+  display:grid;
+}
+
+.idb-social-icons__item{
+  width:54px;
+  height:54px;
+  display:inline-flex;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  transition:all .2s ease;
+}
+
+.idb-social-icons.is-shape-circle .idb-social-icons__item{
+  border-radius:999px;
+}
+
+.idb-social-icons.is-shape-rounded .idb-social-icons__item{
+  border-radius:14px;
+}
+
+.idb-social-icons.is-shape-square .idb-social-icons__item{
+  border-radius:0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .idb-social-icons__item:hover{
+    opacity:.92;
+  }
+}
+
+.idb-social-icons__item i{
+  font-size:24px;
+  font-style:normal;
+  line-height:1;
+  display:inline-block;
+}
+
+.idb-social-icons__item i.fab{
+  font-family:"Font Awesome 5 Brands","Font Awesome 6 Brands",FontAwesome;
+  font-weight:400;
+}
+
+.idb-social-icons__item i.fas,
+.idb-social-icons__item i.far{
+  font-family:"Font Awesome 5 Free","Font Awesome 6 Free",FontAwesome;
+  font-weight:900;
+}
+
+.idb-social-icons__item svg{
+  width:24px;
+  height:24px;
+  fill:currentColor;
+}
+
+.idb-social-icons__item svg path{
+  fill:currentColor;
+}
+
+.idb-social-icons.is-location-buttons,
+.idb-social-icons.is-streaming-buttons{
+  gap:10px;
+}
+
+.idb-social-icons.is-location-buttons .idb-social-icons__item,
+.idb-social-icons.is-streaming-buttons .idb-social-icons__item{
+  width:auto !important;
+  height:auto !important;
+  min-height:0;
+  min-width:0;
+  padding:10px 16px;
+  gap:10px;
+  background-image:none;
+  background-color:#2F63A6;
+  color:var(--idb-loc-btn-text,#ffffff) !important;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(0,0,0,.12);
+}
+
+@media (hover: none) {
+  .idb-social-icons.is-location-buttons .idb-social-icons__item:hover,
+  .idb-social-icons.is-location-buttons .idb-social-icons__item:focus,
+  .idb-social-icons.is-streaming-buttons .idb-social-icons__item:hover,
+  .idb-social-icons.is-streaming-buttons .idb-social-icons__item:focus {
+    opacity:1;
+  }
+
+  .idb-social-icons.is-location-buttons .idb-social-icons__item[class*="elementor-animation-"],
+  .idb-social-icons.is-location-buttons .idb-social-icons__item[class*="elementor-animation-"]:hover,
+  .idb-social-icons.is-location-buttons .idb-social-icons__item[class*="elementor-animation-"]:focus,
+  .idb-social-icons.is-location-buttons .idb-social-icons__item[class*="elementor-animation-"]:active {
+    transform:none !important;
+    animation:none !important;
+  }
+}
+
+.idb-social-icons.is-location-buttons .idb-social-icons__text,
+.idb-social-icons.is-streaming-buttons .idb-social-icons__text{
+  color:var(--idb-loc-btn-text,#ffffff) !important;
+}
+
+.idb-social-icons.is-social-username{
+  gap:10px;
+}
+
+.idb-social-icons.is-social-username .idb-social-icons__item--has-username{
+  width:auto !important;
+  height:auto !important;
+  min-height:0;
+  min-width:0;
+  padding:6px;
+  gap:3px;
+  background-image:none;
+}
+
+.idb-social-icons.is-social-username .idb-social-icons__item--has-username .idb-social-icons__text{
+  line-height:1.25;
+}
+
+.idb-social-icons__text{
+  font-size:14px;
+  font-weight:600;
+  line-height:1;
+  white-space:nowrap;
+}
+
+.idb-social-icons.is-location-buttons .idb-social-icons__item i,
+.idb-social-icons.is-streaming-buttons .idb-social-icons__item i{
+  font-size:1em !important;
+  color:var(--idb-loc-btn-text,#ffffff) !important;
+}
+
+.idb-social-icons.is-social-username .idb-social-icons__item--has-username i{
+  font-size:1em !important;
+}
+
+.idb-social-icons.is-location-buttons .idb-social-icons__item svg,
+.idb-social-icons.is-streaming-buttons .idb-social-icons__item svg{
+  width:1em !important;
+  height:1em !important;
+  color:var(--idb-loc-btn-text,#ffffff) !important;
+  fill:var(--idb-loc-btn-text,#ffffff) !important;
+}
+
+.idb-social-icons.is-social-username .idb-social-icons__item--has-username svg{
+  width:1em !important;
+  height:1em !important;
+}
+
+.idb-social-icons.is-location-buttons .idb-social-icons__item svg path,
+.idb-social-icons.is-streaming-buttons .idb-social-icons__item svg path{
+  fill:var(--idb-loc-btn-text,currentColor) !important;
+  stroke:var(--idb-loc-btn-text,currentColor) !important;
+}
+
+.idb-social-icons.is-social-username .idb-social-icons__item--has-username svg path{
+  fill:currentColor;
+}

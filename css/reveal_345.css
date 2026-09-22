@@ -1,0 +1,160 @@
+/* reveal.css */
+.ef {
+  position: relative;
+  transform: translateY(6rem) scale(.93);
+  opacity: 0;
+  transition: 2.5s all ease;
+}
+
+.ef.active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* SLIDE */
+.ef.slide-up { transform: translateY(6rem); }
+.ef.slide-up.active { transform: translateY(0); }
+
+.ef.slide-right { transform: translateX(-6rem); }
+.ef.slide-right.active { transform: translateX(0); }
+
+.ef.slide-left { transform: translateX(6rem); }
+.ef.slide-left.active { transform: translateX(0); }
+
+.ef.slide-down { transform: translateY(-6rem); }
+.ef.slide-down.active { transform: translateY(0); }
+
+/* FADE */
+.ef.fade-in { opacity: 0; }
+.ef.fade-in.active { opacity: 1; }
+
+.ef.fade-up { transform: translateY(6rem); opacity: 0; }
+.ef.fade-up.active { transform: translateY(0); opacity: 1; }
+
+.ef.fade-right { transform: translateX(-6rem); opacity: 0; }
+.ef.fade-right.active { transform: translateX(0); opacity: 1; }
+
+.ef.fade-down { transform: translateY(-6rem); opacity: 0; }
+.ef.fade-down.active { transform: translateY(0); opacity: 1; }
+
+/* ZOOM */
+.ef.zoom-in { transform: scale(.8); }
+.ef.zoom-in.active { transform: scale(1); }
+
+.ef.zoom-out { transform: scale(1.2); }
+.ef.zoom-out.active { transform: scale(1); }
+
+.ef.zoom-left { transform: translateX(6rem) scale(.8); }
+.ef.zoom-left.active { transform: translateX(0) scale(1); }
+
+.ef.zoom-right { transform: translateX(-6rem) scale(.8); }
+.ef.zoom-right.active { transform: translateX(0) scale(1); }
+
+.ef.zoom-down { transform: translateY(-6rem) scale(.8); }
+.ef.zoom-down.active { transform: translateY(0) scale(1); }
+
+/* ROTATE */
+.ef.rotate-clockwise { transform: rotate(-90deg); }
+.ef.rotate-clockwise.active { transform: rotate(0); }
+
+.ef.rotate-counterclockwise { transform: rotate(90deg); }
+.ef.rotate-counterclockwise.active { transform: rotate(0); }
+
+.ef.rotate-x { transform: rotateX(90deg); }
+.ef.rotate-x.active { transform: rotateX(0); }
+
+.ef.rotate-y { transform: rotateY(90deg); }
+.ef.rotate-y.active { transform: rotateY(0); }
+
+.ef.rotate-z { transform: rotate(45deg); }
+.ef.rotate-z.active { transform: rotate(0); }
+
+.ef.rotate-3d { transform: rotate3d(1,1,1,90deg); }
+.ef.rotate-3d.active { transform: rotate3d(1,1,1,0deg); }
+
+/* ANIMATIONS */
+.ef.spin.active {
+  animation: spin-animation 1s linear infinite;
+}
+@keyframes spin-animation {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+.ef.flip { transform: rotateY(90deg); }
+.ef.flip.active { transform: rotateY(0); }
+
+.ef.shake.active {
+  animation: shake-animation 0.6s ease;
+}
+@keyframes shake-animation {
+  0%,100% { transform: translateX(0); }
+  25%,75% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+}
+
+.ef.pulse.active {
+  animation: pulse 1s ease infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.ef.bounce.active {
+  animation: bounce 1s ease;
+}
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.ef.rubber-band.active {
+  animation: rubber-band 0.6s ease;
+}
+@keyframes rubber-band {
+  0% { transform: scale(1); }
+  30% { transform: scaleX(1.25) scaleY(.75); }
+  40% { transform: scaleX(.75) scaleY(1.25); }
+  50% { transform: scaleX(1.15) scaleY(.85); }
+  65% { transform: scaleX(.95) scaleY(1.05); }
+  75% { transform: scaleX(1.05) scaleY(.95); }
+  100% { transform: scale(1); }
+}
+
+.ef.swing.active {
+  animation: swing-animation 1s ease infinite;
+}
+@keyframes swing-animation {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  100% { transform: rotate(0); }
+}
+
+.ef.lightspeed {
+  transform: translateX(100%) skewX(-30deg);
+}
+.ef.lightspeed.active {
+  transform: translateX(0) skewX(0);
+  opacity: 1;
+}
+
+.ef.roll-in {
+  transform: translateX(-100%) rotate(-120deg);
+}
+.ef.roll-in.active {
+  transform: translateX(0) rotate(0);
+}
+
+.ef.tada.active {
+  animation: tada-animation 1s ease infinite;
+}
+@keyframes tada-animation {
+  0% { transform: scale(1); }
+  10%,20% { transform: scale(.9) rotate(-3deg); }
+  30%,50%,70% { transform: scale(1.1) rotate(3deg); }
+  100% { transform: scale(1); }
+}

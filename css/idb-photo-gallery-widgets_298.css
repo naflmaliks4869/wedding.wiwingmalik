@@ -1,0 +1,285 @@
+.idb-photo{width:100%;}
+/* Placeholder tak terlihat saat slot otomatis tanpa URL (agar :has(.idb-bisdev-foto--slot-db-empty) jalan) */
+.idb-bisdev-foto--sentinel{display:none!important}
+
+/*
+ * Sembunyikan container Elementor:
+ * tambahkan di Container → Lanjutan → Kelas CSS (cover-section | awal-section | akhir-section | mempelai-section).
+ * Target: widget Bisdev Foto Otomatis tanpa URL dari DB (.idb-bisdev-foto--slot-db-empty).
+ * CSS :has() + fallback JS (.idb-sd-hide-empty-photo) di idb-footer-cleanup.js — jangan pakai @supports
+ * karena banyak browser mengembalikan false untuk selector(:has(*)) meskipun :has() jalan.
+ */
+.cover-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-cover.idb-bisdev-foto--slot-db-empty),
+.awal-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-opening.idb-bisdev-foto--slot-db-empty),
+.akhir-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-closing.idb-bisdev-foto--slot-db-empty),
+.mempelai-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-mempelai1.idb-bisdev-foto--slot-db-empty),
+.mempelai-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-mempelai2.idb-bisdev-foto--slot-db-empty){
+  display: none !important;
+}
+
+/*
+ * Tanpa widget Bisdev Foto di dalam container: sembunyikan dari class body (server),
+ * cek meta slot kosong — mis. akhir-section hanya berisi gambar dekor Elementor.
+ */
+body.idb-slot-empty-cover .cover-section,
+body.idb-slot-empty-opening .awal-section,
+body.idb-slot-empty-closing .akhir-section,
+body.idb-slot-empty-mempelai1 .mempelai-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-mempelai1),
+body.idb-slot-empty-mempelai2 .mempelai-section:has(.idb-bisdev-foto--auto.idb-bisdev-foto--slot-mempelai2){
+  display: none !important;
+}
+
+/* Ditambahkan oleh JS bila :has tidak dipakai browser; sama dengan aturan di atas */
+.idb-sd-hide-empty-photo{
+  display: none !important;
+}
+
+/*!
+ * IDB Photo & Gallery Widgets — CLEANED
+ * Notes:
+ * - Consolidated duplicates & overrides into a single, predictable stylesheet.
+ * - Layouts: Grid, Masonry (CSS columns), Justified (flex rows).
+ * - Uses CSS variables:
+ *   --idb-gap      : spacing (px)
+ *   --idb-gap-j    : justified spacing (px) (falls back to --idb-gap)
+ *   --idb-cols     : columns (grid/masonry)
+ *   --idb-row-h    : justified target row height (px) (used by JS / layout)
+ *   --idb-hover-scale : hover scale factor (e.g. 1.06)
+ *   --idb-reveal-scale / --idb-reveal-duration : reveal animation
+ */
+
+/* =========================
+   IDB PHOTO (single image)
+   ========================= */
+.idb-photo__wrap{
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.idb-photo__media{
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.idb-photo__bg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.idb-photo__overlay{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   IDB GALLERY — base
+   ========================= */
+.idb-gallery{
+  width: 100%;
+  --idb-gap: 10px;
+  --idb-cols: 0;
+  --idb-row-h: 220px;
+  --idb-hover-scale: 1.06;
+}
+
+/* Container wrapper */
+.idb-gallery__container{
+  width: 100%;
+}
+
+/* Item + image (single source of truth) */
+.idb-gallery__item,
+.idb-gallery__container .elementor-gallery-item{
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent;
+}
+
+.idb-gallery__img,
+.idb-gallery__container .elementor-gallery-item img{
+  display: block;
+  width: 100%;
+  height: auto;
+  backface-visibility: hidden;
+}
+
+/* Smooth hover scale — only on hover (avoid “default zoom”) */
+.idb-gallery__item img,
+.idb-gallery__container .elementor-gallery-item img{
+  transform: translateZ(0);
+  transform-origin: center;
+  will-change: transform;
+  transition: transform 360ms cubic-bezier(.2,.8,.2,1);
+}
+.idb-gallery__item:hover img,
+.idb-gallery__container .elementor-gallery-item:hover img{
+  transform: translateZ(0) scale(var(--idb-hover-scale, 1.06));
+}
+
+/* Optional: if theme/Elementor injects wrapper image styles */
+.idb-gallery__container .elementor-gallery-item__image{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* =========================
+   REVEAL (scroll)
+   - Your JS toggles .reveal on items.
+   ========================= */
+.idb-gallery.idb-reveal-enabled .elementor-gallery-item,
+.idb-gallery.idb-reveal-enabled .idb-gallery__item{
+  opacity: 0;
+  transform: scale(var(--idb-reveal-scale, 0.92));
+  transition:
+    opacity var(--idb-reveal-duration, 800ms) ease-out,
+    transform var(--idb-reveal-duration, 800ms) ease-out;
+}
+.idb-gallery.idb-reveal-enabled .elementor-gallery-item.reveal,
+.idb-gallery.idb-reveal-enabled .idb-gallery__item.reveal{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* =========================
+   BOOTING (anti “zoom jump”)
+   - JS should toggle: .idb-gallery--booting -> remove when ready
+   ========================= */
+.idb-gallery.idb-gallery--booting .idb-gallery__container{
+  opacity: 0;
+}
+
+/* =========================
+   GRID
+   ========================= */
+.idb-gallery__container.idb-gallery--grid{
+  display: grid !important;
+  grid-template-columns: repeat(var(--idb-cols, 3), minmax(0, 1fr));
+  gap: var(--idb-gap, 10px) !important;
+}
+
+/* Make Grid tiles consistent (avoid “jomplang”) */
+.idb-gallery__container.idb-gallery--grid .elementor-gallery-item,
+.idb-gallery__container.idb-gallery--grid .idb-gallery__item{
+  border-radius: inherit;
+}
+.idb-gallery__container.idb-gallery--grid .elementor-gallery-item img,
+.idb-gallery__container.idb-gallery--grid .idb-gallery__img{
+  height: 100%;
+  object-fit: cover;
+}
+
+/* If your markup uses a fixed ratio box, keep it stable */
+.idb-gallery__container.idb-gallery--grid .elementor-gallery-item{
+  aspect-ratio: 1 / 1;
+}
+
+/* =========================
+   MASONRY (CSS columns)
+   - Consistent spacing (horizontal + vertical) uses the SAME variable.
+   ========================= */
+.idb-gallery__container.idb-gallery--masonry{
+  column-count: var(--idb-cols, 2);
+  column-gap: var(--idb-gap, 10px);
+}
+
+/* each item occupies a full column width */
+.idb-gallery__container.idb-gallery--masonry .elementor-gallery-item,
+.idb-gallery__container.idb-gallery--masonry .idb-gallery__item{
+  width: 100% !important;
+  break-inside: avoid;
+  margin: 0 0 var(--idb-gap, 10px) !important; /* vertical spacing */
+}
+
+/* Masonry images keep natural height */
+.idb-gallery__container.idb-gallery--masonry .elementor-gallery-item img,
+.idb-gallery__container.idb-gallery--masonry .idb-gallery__img{
+  height: auto;
+  object-fit: cover;
+}
+
+/* =========================
+   JUSTIFIED (flex rows)
+   - Spacing uses --idb-gap-j, falls back to --idb-gap
+   ========================= */
+.idb-gallery__container.idb-gallery--justified{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: var(--idb-gap-j, var(--idb-gap, 10px)) !important;
+}
+
+/* Let items auto-size (JS computes widths/heights) */
+.idb-gallery__container.idb-gallery--justified .elementor-gallery-item,
+.idb-gallery__container.idb-gallery--justified .idb-gallery__item{
+  flex: 0 0 auto;
+  width: 100% !important;
+}
+
+/* Default justified crop behavior */
+.idb-gallery__container.idb-gallery--justified .elementor-gallery-item img,
+.idb-gallery__container.idb-gallery--justified .idb-gallery__img{
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Last single item: never crop (follow original ratio) */
+.idb-gallery__container.idb-gallery--justified .elementor-gallery-item.idb-j-last-single,
+.idb-gallery__container.idb-gallery--justified .idb-gallery__item.idb-j-last-single{
+  overflow: visible !important;
+}
+.idb-gallery__container.idb-gallery--justified .elementor-gallery-item.idb-j-last-single img,
+.idb-gallery__container.idb-gallery--justified .idb-gallery__item.idb-j-last-single img,
+.idb-gallery__container.idb-gallery--justified img.idb-j-last-single{
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+
+
+/* =========================
+   MASONRY — FIX spacing “jauh” / tidak rata
+   Penyebab: wrapper Elementor (.elementor-gallery-item__image) masih pakai ratio/padding.
+   ========================= */
+.idb-gallery__container.idb-gallery--masonry{
+  display: block !important;
+  gap: 0 !important;
+  column-gap: var(--idb-gap, 10px) !important;
+  column-count: var(--idb-cols, 2);
+  /*column-fill: auto;*/
+}
+
+.idb-gallery__container.idb-gallery--masonry .elementor-gallery-item,
+.idb-gallery__container.idb-gallery--masonry .idb-gallery__item{
+  width: 100% !important;
+  break-inside: avoid;
+  margin: 0 0 var(--idb-gap, 10px) !important;
+  padding: 0 !important;
+}
+
+.idb-gallery__container.idb-gallery--masonry .elementor-gallery-item__image{
+  padding: 0 !important;
+  margin: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  position: static !important;
+  display: block !important;
+}
+
+.idb-gallery__container.idb-gallery--masonry .elementor-gallery-item__image img,
+.idb-gallery__container.idb-gallery--masonry .idb-gallery__img{
+  position: static !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover;
+}
+
+.idb-gallery__container.idb-gallery--masonry figure{
+  margin: 0 !important;
+}

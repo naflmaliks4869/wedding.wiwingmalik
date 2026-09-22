@@ -1,0 +1,94 @@
+  /* =========================================
+     BISDEV COVER REVEAL
+     Compatible: Elementor / Non-Elementor
+  ========================================= */
+
+  #sec {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+  }
+
+  .aw {
+    display: none;
+  }
+
+  .elementor-editor-active .aw {
+    display: block !important;
+  }
+
+  .af {
+    opacity: 0;
+    transform: translateY(6rem) scale(0.93);
+    transition: all 3s ease;
+  }
+
+  .af.active {
+    opacity: 1;
+    transform: none;
+  }
+
+  .af.zoom-in {
+    transform: scale(0.8);
+  }
+
+  .af.zoom-in.active {
+    transform: scale(1);
+  }
+
+  .af.zoom-out {
+    transform: scale(1.2);
+  }
+
+  .af.zoom-out.active {
+    transform: scale(1);
+  }
+
+  .af.slide-up {
+    transform: translateY(6rem);
+  }
+
+  .af.slide-up.active {
+    transform: translateY(0);
+  }
+
+  .af.slide-down {
+    transform: translateY(-6rem);
+  }
+
+  .af.slide-down.active {
+    transform: translateY(0);
+  }
+
+  .af.slide-left {
+    transform: translateX(6rem);
+  }
+
+  .af.slide-left.active {
+    transform: translateX(0);
+  }
+
+  .af.slide-right {
+    transform: translateX(-6rem);
+  }
+
+  .af.slide-right.active {
+    transform: translateX(0);
+  }
+
+  .elementor-editor-active .af {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* === Audio attention === */
+  .idb-attention {
+    animation: idbPulse 0.8s ease-in-out 3;
+  }
+
+  @keyframes idbPulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }

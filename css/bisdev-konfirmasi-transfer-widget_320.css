@@ -1,0 +1,190 @@
+/* ====================================================================
+   Bisdev Konfirmasi Transfer Widget
+   Konsisten dengan RSVP & widget Bisdev lainnya
+   ==================================================================== */
+
+.idb-konfirmasi-transfer {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.idb-konfirmasi-transfer__box {
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e5e2db;
+  border-radius: 12px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.idb-konfirmasi-transfer__title {
+  margin: 0 0 16px 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #374151;
+  text-align: center;
+}
+
+.idb-konfirmasi-transfer__form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.idb-konfirmasi-transfer__field {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.idb-konfirmasi-transfer__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #555555;
+}
+
+/* Input & Textarea - border tipis dan halus */
+.idb-konfirmasi-transfer__input,
+.idb-konfirmasi-transfer__textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444444;
+  background-color: #ffffff;
+  border: 1px solid #e8e6e0;
+  border-radius: 8px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.idb-konfirmasi-transfer__input::placeholder,
+.idb-konfirmasi-transfer__textarea::placeholder {
+  color: #b6b3aa;
+}
+
+.idb-konfirmasi-transfer__input:hover,
+.idb-konfirmasi-transfer__textarea:hover {
+  border-color: #103468;
+  box-shadow: 0 0 0 1px rgba(156, 168, 99, 0.08);
+}
+
+.idb-konfirmasi-transfer__input:focus,
+.idb-konfirmasi-transfer__textarea:focus {
+  border-color: #103468;
+  box-shadow: 0 0 0 2px rgba(156, 168, 99, 0.15);
+}
+
+.idb-konfirmasi-transfer__textarea {
+  resize: vertical;
+  min-height: 88px;
+}
+
+/* Tombol Kirim - selaras RSVP */
+.idb-konfirmasi-transfer__field-btn {
+  margin-top: 4px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.idb-konfirmasi-transfer__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  background-color: #5e6a3b;
+  color: #ffffff;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+  box-sizing: border-box;
+}
+
+.idb-konfirmasi-transfer__btn .idb-konfirmasi-transfer__btn-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.idb-konfirmasi-transfer__btn .idb-konfirmasi-transfer__btn-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.idb-konfirmasi-transfer__btn:hover {
+  background-color: #4a542f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.idb-konfirmasi-transfer__btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Perataan tombol */
+.idb-btn-align-left {
+  justify-content: flex-start;
+}
+
+.idb-btn-align-center {
+  justify-content: center;
+}
+
+.idb-btn-align-right {
+  justify-content: flex-end;
+}
+
+.idb-btn-align-stretch {
+  justify-content: flex-start;
+}
+
+.idb-btn-align-stretch .idb-konfirmasi-transfer__btn {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .idb-konfirmasi-transfer__box {
+    border-radius: 10px;
+  }
+
+  .idb-konfirmasi-transfer__input,
+  .idb-konfirmasi-transfer__textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .idb-konfirmasi-transfer__btn {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Override reset.css - spesifisitas tinggi supaya menang, tanpa !important agar pengaturan Elementor tetap berlaku */
+.idb-konfirmasi-transfer input.idb-konfirmasi-transfer__input,
+.idb-konfirmasi-transfer textarea.idb-konfirmasi-transfer__textarea {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e8e6e0;
+}

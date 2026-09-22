@@ -1,0 +1,57 @@
+/* ===== Bisdev Countdown (Stretch + 1 baris + auto-shrink) ===== */
+
+/* wrapper utama: stretch (rentangkan) */
+.idb-countdown{
+  width:100%;
+  max-width:100%;
+  align-self:stretch;    /* ✅ efek “rentangkan” di layout flex */
+  display:block;
+}
+
+/* row: selalu 1 baris */
+.idb-countdown__row{
+  display:flex;
+  width:100%;
+  flex-wrap:nowrap;                       /* ✅ jangan turun */
+  align-items:stretch;                    /* ✅ tinggi box seragam */
+  justify-content:space-between;
+  gap:clamp(6px, 1.8vw, 12px);            /* ✅ shrink gap otomatis */
+}
+
+/* item: dibagi rata + boleh mengecil */
+.idb-countdown__item{
+  flex:1 1 0;                              /* ✅ bagi rata */
+  min-width:0;                             /* ✅ kunci anti turun */
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(7px, 1.8vw, 10px) clamp(8px, 2.2vw, 14px);
+  border-radius:clamp(12px, 2.5vw, 16px);
+  background:#0f2a59;
+  color:#fff;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* angka & label auto-shrink */
+.idb-countdown__num{
+  font-weight:700;
+  font-size:clamp(14px, 4.2vw, 18px);
+  line-height:1;
+  white-space:nowrap;
+}
+
+.idb-countdown__label{
+  font-size:clamp(10px, 3.0vw, 12px);
+  opacity:0.95;
+  line-height:1.1;
+  margin-top:clamp(2px, 0.9vw, 4px);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.idb-countdown__finish{
+  text-align:center;
+  font-weight:600;
+}

@@ -1,0 +1,15 @@
+/* Title: RES DEKSTOP (as-is) */
+#desk_cov{left:0;top:0;width:calc(100% - 500px);height:100vh;overflow:hidden}
+.ajaibfixed .elementor-background-overlay{position:fixed!important;top:0!important;left:calc(100% - 500px)!important;width:500px!important;pointer-events:none}
+@media (max-width:500px){#desk_cov{display:none}}
+@media (max-width:900px) and (min-width:768px){#desk_cov{width:50%}#isi{margin-left:50%;width:50%}.ajaibfixed .elementor-background-overlay{left:50%!important;width:50%!important}}
+@media (max-width:768px){#desk_cov{display:none}#isi{margin-left:auto;margin-right:auto;width:100%}.ajaibfixed .elementor-background-overlay{left:0!important;width:100%!important}}
+body{overflow-x:hidden!important}
+html{scroll-behavior:auto!important}
+@media (min-width:990px){
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background-color:#fff0}
+  ::-webkit-scrollbar-thumb{background-color:#d6dee1;border-radius:20px;border:2px solid #fff0;background-clip:content-box}
+  ::-webkit-scrollbar-thumb:hover{background-color:#a8bbbf}
+}
+#open{cursor:pointer}

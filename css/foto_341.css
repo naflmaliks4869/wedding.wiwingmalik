@@ -1,0 +1,40 @@
+/* Title: FOTO */
+.acara img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+  image-rendering: high-quality;
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+}
+
+.profil img {
+  width: 180px;
+  height: 270px;
+  object-fit: cover;
+  object-position: top center;
+  image-rendering: high-quality;
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+}
+
+.acara2 img {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  object-position: top center;
+  image-rendering: high-quality;
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+}
+
+.roll img{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  object-position: top center;
+  image-rendering: high-quality;
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+}

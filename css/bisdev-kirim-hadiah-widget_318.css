@@ -1,0 +1,139 @@
+/* Bisdev Kirim Hadiah Widget styles */
+.idb-kirim-hadiah {
+  position: relative;
+}
+/* Auto mode: beri jarak antar card kirim hadiah */
+.idb-kirim-hadiah.idb-kirim-hadiah--auto + .idb-kirim-hadiah.idb-kirim-hadiah--auto {
+  margin-top: 12px;
+}
+.idb-kirim-hadiah.idb-kirim-hadiah--auto:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.idb-kirim-hadiah__box {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  box-sizing: border-box;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  text-align: center;
+}
+
+.idb-kirim-hadiah__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 22px;
+  line-height: 1;
+  margin: 0 auto 10px;
+  text-align: center;
+}
+
+.idb-kirim-hadiah__icon i,
+.idb-kirim-hadiah__icon svg {
+  display: block;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.idb-kirim-hadiah__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.idb-kirim-hadiah__title {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.idb-kirim-hadiah__content {
+  text-align: center;
+  width: 100%;
+}
+
+.idb-kirim-hadiah__line {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1e1e1e;
+  word-wrap: break-word;
+}
+
+.idb-kirim-hadiah__line + .idb-kirim-hadiah__line {
+  margin-top: 2px;
+}
+
+.idb-kirim-hadiah__label {
+  font-weight: 500;
+}
+
+.idb-kirim-hadiah__sep {
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.idb-kirim-hadiah__value {
+  font-weight: 400;
+}
+
+.idb-kirim-hadiah__line--alamat .idb-kirim-hadiah__value {
+  display: inline;
+}
+
+.idb-kirim-hadiah__copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.85);
+  color: inherit;
+}
+
+.idb-kirim-hadiah__copy-icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.idb-kirim-hadiah__copy-btn.is-copied {
+  opacity: 0.92;
+}
+
+.idb-kirim-hadiah__copy-btn.is-failed {
+  opacity: 0.85;
+}
+
+.idb-kirim-hadiah__toast {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -10px;
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.18s ease;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 2;
+}
+
+.idb-kirim-hadiah__toast.is-show {
+  opacity: 1;
+  transform: translateY(calc(100% + 4px));
+}

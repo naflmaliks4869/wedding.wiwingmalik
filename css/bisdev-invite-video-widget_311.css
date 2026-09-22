@@ -1,0 +1,77 @@
+/* Bisdev Video Undangan — embed responsif 16:9 (tanpa crop) */
+.bisdev-invite-video {
+  width: 100%;
+}
+
+/*
+ * Kotak 16:9 memakai padding-bottom (dari Elementor).
+ * box-sizing: content-box wajib agar tinggi kotak benar di tema border-box global.
+ */
+.bisdev-invite-video__inner {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  line-height: 0;
+  font-size: 0;
+  background: #000;
+  box-sizing: content-box;
+}
+
+/* Isi penuh area 16:9 — top/right/bottom/left agar bawah tidak terpotong */
+.bisdev-invite-video__iframe {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
+}
+
+.bisdev-invite-video__native {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
+  object-fit: contain;
+  object-position: center center;
+  background: #000;
+}
+
+/* Tutup strip "More videos" YouTube — hanya saat jeda / selesai (bukan saat play) */
+.bisdev-invite-video[data-video-type="youtube"] .bisdev-invite-video__inner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background: #000;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: height 0.15s ease, opacity 0.15s ease;
+}
+
+.bisdev-invite-video--hide-more .bisdev-invite-video__inner::after {
+  height: 52px;
+  opacity: 1;
+}
+
+.bisdev-invite-video--empty {
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+}

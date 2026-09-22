@@ -1,0 +1,281 @@
+/* reveal.css — dipakai Bisdev Reveal & widget Love Story/Timeline (.idb-reveal.idb-ef) */
+.idb-ef {
+  position: relative;
+  transform: translateY(6rem) scale(.93);
+  opacity: 0;
+  transition: 2s transform ease, 2s opacity ease;
+}
+
+.idb-ef.active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* SLIDE */
+.idb-ef.slide-up { transform: translateY(6rem); }
+.idb-ef.slide-up.active { transform: translateY(0); }
+
+.idb-ef.slide-right { transform: translateX(-6rem); }
+.idb-ef.slide-right.active { transform: translateX(0); }
+
+.idb-ef.slide-left { transform: translateX(6rem); }
+.idb-ef.slide-left.active { transform: translateX(0); }
+
+.idb-ef.slide-down { transform: translateY(-6rem); }
+.idb-ef.slide-down.active { transform: translateY(0); }
+
+/* FADE */
+.idb-ef.fade-in { opacity: 0; }
+.idb-ef.fade-in.active { opacity: 1; }
+
+.idb-ef.fade-up { transform: translateY(6rem); opacity: 0; }
+.idb-ef.fade-up.active { transform: translateY(0); opacity: 1; }
+
+.idb-ef.fade-left { transform: translateX(6rem); opacity: 0; }
+.idb-ef.fade-left.active { transform: translateX(0); opacity: 1; }
+
+.idb-ef.fade-right { transform: translateX(-6rem); opacity: 0; }
+.idb-ef.fade-right.active { transform: translateX(0); opacity: 1; }
+
+.idb-ef.fade-down { transform: translateY(-6rem); opacity: 0; }
+.idb-ef.fade-down.active { transform: translateY(0); opacity: 1; }
+
+/* ZOOM: mulai sangat kecil + opacity 0 → membesar + opacity 1 */
+.idb-ef.zoom-in {
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-in.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* zoom-out: mulai besar + opacity 0 → mengecil ke ukuran normal + opacity 1 */
+.idb-ef.zoom-out {
+  transform: scale(1.5);
+  opacity: 0;
+}
+.idb-ef.zoom-out.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* zoom-left: dari kiri kecil → membesar ke kanan */
+.idb-ef.zoom-left {
+  transform-origin: left center;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-left.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* zoom-right: dari kanan kecil → membesar ke kiri */
+.idb-ef.zoom-right {
+  transform-origin: right center;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-right.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* zoom-up: dari atas kecil → membesar ke bawah */
+.idb-ef.zoom-up {
+  transform-origin: top center;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-up.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* zoom-down: dari bawah kecil → membesar ke atas */
+.idb-ef.zoom-down {
+  transform-origin: bottom center;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-down.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* zoom dari sudut */
+.idb-ef.zoom-bottom-right {
+  transform-origin: bottom right;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-bottom-right.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.idb-ef.zoom-bottom-left {
+  transform-origin: bottom left;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-bottom-left.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.idb-ef.zoom-top-right {
+  transform-origin: top right;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-top-right.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.idb-ef.zoom-top-left {
+  transform-origin: top left;
+  transform: scale(0.01);
+  opacity: 0;
+}
+.idb-ef.zoom-top-left.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ROTATE */
+.idb-ef.rotate-clockwise { transform: rotate(-90deg); }
+.idb-ef.rotate-clockwise.active { transform: rotate(0); }
+
+.idb-ef.rotate-counterclockwise { transform: rotate(90deg); }
+.idb-ef.rotate-counterclockwise.active { transform: rotate(0); }
+
+.idb-reveal.idb-ef.rotate-x,
+.idb-reveal.idb-ef.rotate-y,
+.idb-reveal.idb-ef.rotate-3d,
+.idb-reveal.idb-ef.flip {
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+.idb-ef.rotate-x { transform: rotateX(90deg); }
+.idb-ef.rotate-x.active { transform: rotateX(0); }
+
+.idb-ef.rotate-y { transform: rotateY(90deg); }
+.idb-ef.rotate-y.active { transform: rotateY(0); }
+
+.idb-ef.rotate-z { transform: rotate(45deg); }
+.idb-ef.rotate-z.active { transform: rotate(0); }
+
+.idb-ef.rotate-3d { transform: rotate3d(1,1,1,90deg); }
+.idb-ef.rotate-3d.active { transform: rotate3d(1,1,1,0deg); }
+
+/* ANIMATIONS */
+.idb-ef.spin.active {
+  animation: spin-animation 1s linear infinite;
+}
+@keyframes spin-animation {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+.idb-ef.flip { transform: rotateY(90deg); }
+.idb-ef.flip.active { transform: rotateY(0); }
+
+.idb-ef.shake.active {
+  animation: shake-animation 0.6s ease;
+}
+@keyframes shake-animation {
+  0%,100% { transform: translateX(0); }
+  25%,75% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+}
+
+.idb-ef.pulse.active {
+  animation: pulse 1s ease infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.idb-ef.bounce.active {
+  animation: bounce 1s ease;
+}
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.idb-ef.rubber-band.active {
+  animation: rubber-band 0.6s ease;
+}
+@keyframes rubber-band {
+  0% { transform: scale(1); }
+  30% { transform: scaleX(1.25) scaleY(.75); }
+  40% { transform: scaleX(.75) scaleY(1.25); }
+  50% { transform: scaleX(1.15) scaleY(.85); }
+  65% { transform: scaleX(.95) scaleY(1.05); }
+  75% { transform: scaleX(1.05) scaleY(.95); }
+  100% { transform: scale(1); }
+}
+
+.idb-ef.swing.active {
+  animation: swing-animation 1s ease infinite;
+}
+@keyframes swing-animation {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  100% { transform: rotate(0); }
+}
+
+.idb-ef.lightspeed {
+  transform: translateX(100%) skewX(-30deg);
+  opacity: 0;
+}
+.idb-ef.lightspeed.active {
+  transform: translateX(0) skewX(0);
+  opacity: 1;
+}
+
+.idb-ef.roll-in {
+  transform: translateX(-100%) rotate(-120deg);
+  opacity: 0;
+}
+.idb-ef.roll-in.active {
+  transform: translateX(0) rotate(0);
+  opacity: 1;
+}
+
+.idb-ef.tada.active {
+  animation: tada-animation 1s ease infinite;
+}
+@keyframes tada-animation {
+  0% { transform: scale(1); }
+  10%,20% { transform: scale(.9) rotate(-3deg); }
+  30%,50%,70% { transform: scale(1.1) rotate(3deg); }
+  100% { transform: scale(1); }
+}
+
+/* Scroll ke atas: tampil instan (JS menambah .idb-reveal-static) */
+.idb-reveal.idb-ef.idb-reveal-static {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Aksesibilitas: tanpa animasi gerak */
+@media (prefers-reduced-motion: reduce) {
+  .idb-reveal.idb-ef,
+  .idb-reveal.idb-ef.active,
+  .idb-reveal.idb-ef.idb-reveal-static {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

@@ -1,0 +1,47 @@
+.idb-watermark-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Editor Elementor / tema: cegah flex row induk mengubah stack logo + teks */
+.elementor-widget-text-editor .idb-watermark-block,
+.elementor-widget-text-editor .elementor-text-editor .idb-watermark-block {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.idb-watermark-block .idb-watermark-logo,
+.idb-watermark-block > img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.idb-watermark-block .idb-watermark-logo--custom-radius,
+.idb-watermark-block > img.idb-watermark-logo--custom-radius {
+  overflow: hidden;
+}
+
+.idb-watermark-block .idb-watermark-logo:not(.idb-watermark-logo--custom-size),
+.idb-watermark-block > img:not(.idb-watermark-logo--custom-size) {
+  width: auto;
+  height: auto;
+}
+
+.idb-watermark-block .idb-watermark-text {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  line-height: 1.4;
+}
